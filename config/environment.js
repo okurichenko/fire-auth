@@ -3,16 +3,34 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'fire-auth',
+    podModulePrefix: 'fire-auth/pods',
     environment: environment,
-    rootURL: '/',
-    locationType: 'auto',
+    rootURL: '/demo',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
       }
     },
+    torii: {
+      sessionServiceName: 'session'
+    },
+    // ...
+    firebase: {
+      apiKey: "AIzaSyB5htWTTwFBhcSrDcQQPZ_NCKAzLy0X-XE",
+      authDomain: "ember-app-d502d.firebaseapp.com",
+      databaseURL: "https://ember-app-d502d.firebaseio.com",
+      storageBucket: "ember-app-d502d.appspot.com",
+      messagingSenderId: "546785880099",
+    },
 
+    // if using ember-cli-content-security-policy
+    contentSecurityPolicy: {
+      'script-src': "'self' 'unsafe-eval' apis.google.com",
+      'frame-src': "'self' https://*.firebaseapp.com",
+      'connect-src': "'self' wss://*.firebaseio.com https://*.googleapis.com"
+    },
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
