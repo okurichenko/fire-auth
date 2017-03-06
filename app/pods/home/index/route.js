@@ -10,11 +10,17 @@ export default Ember.Route.extend({
         options = Object.assign(options, {
           email: this.get('controller.email'),
           password: this.get('controller.password'),
-        })
+        });
+        const ref = this.get('firebaseApp').auth();
+        promise = ref.createUserWithEmailAndPassword(this.get('controller.email'),this.get('controller.password'));
       }
-      return this.get('session').open('firebase', options).then(function(data) {
-        console.log(data.currentUser);
-      });
+      return promise
+        .then(() => {
+          return this.get('session').open('firebase', options).then(function(data) {
+            console.log(data.currentUser);
+          });
+        })
+        .catch((e) => { console.log(e); });
     },
     signOut() {
       this.get('session').close();
